@@ -17,7 +17,7 @@
 
   a {
     text-decoration: none;
-    color: inherit;
+    color:gray;
   }
 
   #app {
