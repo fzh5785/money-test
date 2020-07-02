@@ -24,23 +24,9 @@
       }
       this.type = type;
     }
-  }
-  // export default {
-  //   name: 'Types',
-  //   data(){
-  //     return {
-  //       type: '-'  //'-'表示支出，'+'表示收入
-  //     }
-  //   },
-  //   methods: {
-  //     selectType(type){
-  //       if(type !=='-' && type!=='+'){
-  //         throw new Error('type is unknown')
-  //       }
-  //       this.type = type
-  //     }
-  //   }
-  // };
+    }
+
+
 </script>
 
 <style lang="scss" scoped>
