@@ -19,12 +19,12 @@ const tagListModel: TagListModel = {
   create(name) {
     const names = this.data.map(item => item.name)
     if (names.indexOf(name) >= 0) {return 'duplicated';}
-    this.data.push({id:name ,name:name});
+    this.data.push({id: name, name: name});
     this.save();
     return 'success';
   },
   save() {
-    window.localStorage.setItem('recordList', JSON.stringify(this.data));
+    window.localStorage.setItem(localStorageKeyName, JSON.stringify(this.data));
   }
 };
 export default tagListModel;
