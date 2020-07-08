@@ -2,14 +2,14 @@
   <layout>
     <div class="tags">
       <router-link class="tag" v-for="tag in tags" :key="tag.id"
-      :to="`/labels/edit/${tag.id}`">
+                   :to="`/labels/edit/${tag.id}`">
         <span>{{tag.name}}</span>
         <Icon name="right"/>
       </router-link>
     </div>
 
     <div class="createTag-wrapper">
-      <Button class="createTag" @click="createTag">新建标签</Button>
+      <Button @click="createTag">新建标签</Button>
     </div>
   </layout>
 </template>
@@ -61,18 +61,9 @@
       font-size: 24px;
     }
   }
-
-  .createTag {
-    background: #767676;
-    color: white;
-    border-radius: 4px;
-    border: none;
-    height: 40px;
-    padding: 0 16px;
-
-    &-wrapper {
-      text-align: center;
-      padding: 44px;
-    }
+  .createTag-wrapper {
+    text-align: center;
+    padding: 44px;
   }
+
 </style>
