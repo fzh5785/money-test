@@ -10,7 +10,7 @@
       @update:value="update"/>
     </div>
     <div class="button-wrapper">
-      <Button @click="remove">删除标签</Button>
+      <Button @click="remove" style="background:rgb(255,58,49);">删除标签</Button>
     </div>
 
 
@@ -48,7 +48,9 @@
     }
     remove(){
       if(this.tag){
-        tagListModel.remove(this.tag.id)
+        if(tagListModel.remove(this.tag.id)){
+             this.$router.back()
+        }
       }
     }
     goBack(){
