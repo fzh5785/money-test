@@ -9,7 +9,6 @@ const tagListModel: TagListModel = {
     return this.data;
   },
   create(name) {
-
     const names = this.data.map(item => item.name); //获取data每一项的name
     if (names.indexOf(name) >= 0) {return 'duplicated';}
     const id = createId().toString();
