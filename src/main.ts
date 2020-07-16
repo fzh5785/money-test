@@ -15,11 +15,12 @@ Vue.component('Layout', Layout);
 Vue.component('Icon', Icon);
 
 
-
-
-
 new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount('#app');
+
+if (document.documentElement.clientWidth > 500) {
+  window.alert('请使用手机打开页面，以保证浏览效果');
+}
