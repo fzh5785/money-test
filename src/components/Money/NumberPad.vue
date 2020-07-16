@@ -67,9 +67,10 @@
     .output {
       font-size: 36px;
       font-family: Consolas, monospace;
-      padding: 9px 16px;
+      padding: 0 16px;
       text-align: right;
-      height: 72px;
+      height: 58px;
+      background: white;
     }
 
     .buttons {
@@ -86,6 +87,7 @@
         &.ok {
           height: 64*2px;
           float: right;
+          color: white;
         }
 
         &.zero {
@@ -119,7 +121,7 @@
         }
 
         &:nth-child(12) {
-          background: darken($bg, 4*6%);
+          background: rgb(80,131,255)
         }
       }
     }

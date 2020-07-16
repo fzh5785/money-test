@@ -30,7 +30,7 @@
     font-size: 12px;
 
     > .item {
-      padding: 2px 0;
+      padding: 5px 0;
       width: 33.3333%;
       display: flex;
       justify-content: center;
@@ -38,8 +38,8 @@
       flex-direction: column;
     }
     .icon {
-      width: 32px;
-      height: 32px;
+      width: 24px;
+      height: 24px;
     }
     >.item.selected {
       color: $color-highlight;

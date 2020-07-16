@@ -40,7 +40,7 @@
 
 <style lang="scss" scoped>
   .tabs {
-    background: #c4c4c4;
+    background: rgb(243,243,243);
     display: flex;
     text-align: center;
     font-size: 24px;
@@ -53,14 +53,19 @@
       align-items: center;
       position: relative;
 
-      &.selected::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        border: 2px solid #333;
-        width: 100%;
+      &.selected {
+        color: white;
+        background: rgb(80, 131, 255);
       }
+
+      /*&.selected::after {*/
+      /*  content: '';*/
+      /*  position: absolute;*/
+      /*  bottom: 0;*/
+      /*  left: 0;*/
+      /*  border: 2px solid rgb(80, 131, 255);*/
+      /*  width: 100%;*/
+      /*}*/
     }
   }
 </style>

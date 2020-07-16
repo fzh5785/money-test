@@ -44,7 +44,7 @@
     }
 
     input {
-      height: 40px;
+      height: 28px;
       flex-grow: 1;
       background: transparent;
       border: none;
