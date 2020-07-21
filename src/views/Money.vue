@@ -7,7 +7,13 @@
       <FormItem field-name="备注" placeholder="在这里输入备注"
                 :value.sync="record.notes"/>
     </div>
-    <Tags @update:value="record.tags = $event"/>
+    <div class="createAt">
+      <FormItem field-name="日期" placeholder="在这里输入日期"
+                type="date"
+                :value.sync="record.createdAt"/>
+    </div>
+    <Tags @update:value="record.tags = $event"
+          />
   </layout>
 </template>
 
@@ -19,7 +25,9 @@
   import {Component} from 'vue-property-decorator';
   import Tabs from '@/components/Tabs.vue';
   import recordTypeList from '@/constants/recordTypeList';
+  import echarts from 'echarts'
 
+  console.log(echarts);
   @Component({
     components: {Tabs, Tags, FormItem, NumberPad},
   })
@@ -30,7 +38,7 @@
 
     recordTypeList = recordTypeList;
     record: RecordItem = {
-      tags: [], notes: '', type: '-', amount: 0
+      tags: [], notes: '', type: '-', amount: 0 , createdAt: new Date().toISOString()
     };
 
     created() {

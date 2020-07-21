@@ -21,7 +21,7 @@ const store = new Vuex.Store({
     },
     createRecord(state, record: RecordItem) {
       const record2 = clone(record);
-      record2.createdAt = new Date().toISOString();
+      record2.createdAt = record2.createdAt || new Date().toISOString();
       state.recordList?.push(record2); //===this.recordList&& this.recordList.push(record2) 可选链语法
       store.commit('saveRecords');
 
@@ -36,18 +36,18 @@ const store = new Vuex.Store({
     },
     fetchTags(state) {
       state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]');
-      if(!state.tagList || state.tagList.length===0){
-        store.commit('createTag','衣')
-        store.commit('createTag','食')
-        store.commit('createTag','住')
-        store.commit('createTag','行')
+      if (!state.tagList || state.tagList.length === 0) {
+        store.commit('createTag', '衣');
+        store.commit('createTag', '食');
+        store.commit('createTag', '住');
+        store.commit('createTag', '行');
       }
     },
     createTag(state, name: string) {
-      state.createTagError = null
+      state.createTagError = null;
       const names = state.tagList.map(item => item.name); //获取data每一项的name
       if (names.indexOf(name) >= 0) {
-        state.createTagError = new Error('tag name duplicated')
+        state.createTagError = new Error('tag name duplicated');
       }
       const id = createId().toString();
       state.tagList.push({id, name: name});

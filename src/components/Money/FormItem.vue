@@ -2,7 +2,7 @@
   <div>
     <label class="formItem">
       <span class="name">{{this.fieldName}}</span>
-      <input type="text" :placeholder="placeholder"
+      <input :type="type||'text'" :placeholder="placeholder"
              :value="value" @input="onValueChange($event.target.value)">
       <!--:value="value" @input="onInput" === v-model-->
 
@@ -19,6 +19,7 @@
     @Prop({default: ''}) readonly value!: string;
     @Prop({required: true}) fieldName!: string;
     @Prop() placeholder?: string;
+    @Prop() type?: string;
 
 
     onValueChange(value: string) {
