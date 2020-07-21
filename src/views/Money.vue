@@ -6,9 +6,8 @@
     <div class="notes">
       <FormItem field-name="备注" placeholder="在这里输入备注"
                 :value.sync="record.notes"/>
-    </div>
-    <div class="createAt">
-      <FormItem field-name="日期" placeholder="在这里输入日期"
+
+      <FormItem field-name="日期"
                 type="date"
                 :value.sync="record.createdAt"/>
     </div>

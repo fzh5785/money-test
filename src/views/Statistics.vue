@@ -2,19 +2,23 @@
   <layout>
     <Tabs class-prefix="type" :data-source="recordTypeList"
           :value.sync="type"/>
-      <ol v-if="groupedList.length>0">
-        <li v-for="(group,index) in groupedList" :key="index">
-          <h3 class="title">{{beautify(group.title)}} <span>￥{{group.total}}</span></h3>
-          <ol>
-            <li v-for="item in group.items" :key="item.id"
-                class="record">
-              <span>{{tagString(item.tags)}}</span>
-              <span class="notes">{{item.notes}}</span>
-              <span>￥{{item.amount}} </span>
-            </li>
-          </ol>
-        </li>
-      </ol>
+    <div class="chart-wrapper" ref="chartWrapper">
+      <Chart class="chart" :options="x"/>
+    </div>
+
+    <ol v-if="groupedList.length>0">
+      <li v-for="(group,index) in groupedList" :key="index">
+        <h3 class="title">{{beautify(group.title)}} <span>￥{{group.total}}</span></h3>
+        <ol>
+          <li v-for="item in group.items" :key="item.id"
+              class="record">
+            <span>{{tagString(item.tags)}}</span>
+            <span class="notes">{{item.notes}}</span>
+            <span>￥{{item.amount}} </span>
+          </li>
+        </ol>
+      </li>
+    </ol>
     <div v-else class="noResult">
       目前没有相关记录
     </div>
@@ -28,12 +32,60 @@
   import recordTypeList from '@/constants/recordTypeList';
   import dayjs from 'dayjs';
   import clone from '@/lib/clone';
+  import Chart from '@/components/Chart.vue';
 
 
   @Component({
-    components: {Tabs},
+    components: {Chart, Tabs},
   })
   export default class Statistics extends Vue {
+    mounted(){
+      const div = this.$refs.chartWrapper as HTMLDivElement
+      div.scrollLeft = div.scrollWidth
+    }
+    get x() {
+      return {
+        grid: {
+          left: 0,
+          right: 0
+        },
+        xAxis: {
+          type: 'category',
+          data: [
+            '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+            '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
+            '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'
+          ],
+          axisTick: {
+            alignWithLabel:true
+          }
+        },
+        yAxis: {
+          type: 'value',
+          show: false
+        },
+        series: [{
+          symbol: 'circle',
+          itemStyle: {
+            color: 'rgb(80, 131, 255)'
+          },
+          data: [
+            820, 932, 901, 934, 1290, 1330, 1320,
+            820, 932, 901, 934, 1290, 1330, 1320,
+            820, 932, 901, 934, 1290, 1330, 1320,
+            820, 932, 901, 934, 1290, 1330, 1320,
+          ],
+          symbolSize: 12,
+          type: 'line'
+        }],
+        tooltip: {
+          show: true,
+          formatter:'{c}',
+          position:'top'
+        }
+      };
+    }
+
     beautify(string: string) {
       const now = dayjs();
       const day = dayjs(string);
@@ -51,7 +103,7 @@
     }
 
     tagString(tags: Tag[]) {
-      return tags.length === 0 ? '无' : tags.map(t=>t.name).join('，');
+      return tags.length === 0 ? '无' : tags.map(t => t.name).join('，');
     }
 
     get recordList() {
@@ -91,10 +143,24 @@
 </script>
 
 <style lang="scss" scoped>
-  .noResult{
+
+  .chart {
+    width: 430%;
+
+    &-wrapper {
+      overflow: auto;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  .noResult {
     padding: 16px;
     text-align: center;
   }
+
   %item {
     padding: 8px 16px;
     line-height: 24px;
@@ -123,7 +189,7 @@
       background: white;
 
       &.selected {
-        background: rgb(80,131,255);
+        background: rgb(80, 131, 255);
         color: white;
 
         &::after {
