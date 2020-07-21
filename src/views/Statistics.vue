@@ -2,8 +2,9 @@
   <layout>
     <Tabs class-prefix="type" :data-source="recordTypeList"
           :value.sync="type"/>
+
     <div class="chart-wrapper" ref="chartWrapper">
-      <Chart class="chart" :options="x"/>
+      <Chart class="chart" :options="chartOptions"/>
     </div>
 
     <ol v-if="groupedList.length>0">
@@ -33,31 +34,66 @@
   import dayjs from 'dayjs';
   import clone from '@/lib/clone';
   import Chart from '@/components/Chart.vue';
-
+  import _ from 'lodash';
 
   @Component({
     components: {Chart, Tabs},
   })
   export default class Statistics extends Vue {
-    mounted(){
-      const div = this.$refs.chartWrapper as HTMLDivElement
-      div.scrollLeft = div.scrollWidth
+    mounted() {
+      const div = this.$refs.chartWrapper as HTMLDivElement;
+      div.scrollLeft = div.scrollWidth;
     }
-    get x() {
+
+    get keyValueList() {
+      const today = new Date();
+      const array = [];
+      for (let i = 0; i <= 29; i++) {
+        const dateString = dayjs(today).subtract(i, 'day').format('YYYY-MM-DD');
+        const found = _.find(this.groupedList, {title: dateString});
+        array.push({
+          key: dateString, value: found ? found.total : 0
+        });
+      }
+      array.sort((a, b) => {
+        if (a.key > b.key) {
+          return 1;
+        } else if (a.key === b.key) {
+          return 0;
+        } else {
+          return -1;
+        }
+      });
+      return array;
+    }
+
+    get chartOptions() {
+
+      const keys = this.keyValueList.map(item => item.key);
+      const values = this.keyValueList.map(item => item.value);
       return {
         grid: {
           left: 0,
-          right: 0
+          right: 0,
+          top: 60,
+          bottom: 50
         },
         xAxis: {
           type: 'category',
-          data: [
-            '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
-            '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
-            '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'
-          ],
+          data: keys,
           axisTick: {
-            alignWithLabel:true
+            alignWithLabel: true
+          },
+          axisLine: {
+            lineStyle: {
+              color: 'rgb(80, 131, 255)'
+            }
+          },
+          axisLabel: {
+            color: '#333',
+            formatter: function (value: string) {
+              return value.substr(5);
+            }
           }
         },
         yAxis: {
@@ -69,19 +105,14 @@
           itemStyle: {
             color: 'rgb(80, 131, 255)'
           },
-          data: [
-            820, 932, 901, 934, 1290, 1330, 1320,
-            820, 932, 901, 934, 1290, 1330, 1320,
-            820, 932, 901, 934, 1290, 1330, 1320,
-            820, 932, 901, 934, 1290, 1330, 1320,
-          ],
+          data: values,
           symbolSize: 12,
           type: 'line'
         }],
         tooltip: {
           show: true,
-          formatter:'{c}',
-          position:'top'
+          formatter: '{c}',
+          position: 'top'
         }
       };
     }
@@ -170,7 +201,8 @@
   }
 
   .title {
-    @extend %item
+    @extend %item;
+
   }
 
   .record {
@@ -186,8 +218,6 @@
 
   ::v-deep {
     .type-tabs-item {
-      background: white;
-
       &.selected {
         background: rgb(80, 131, 255);
         color: white;
