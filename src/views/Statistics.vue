@@ -7,7 +7,7 @@
       <Chart class="chart" :options="chartOptions"/>
     </div>
 
-    <ol v-if="groupedList.length>0">
+    <ol v-if="groupedList.length>0" class="group-wrapper">
       <li v-for="(group,index) in groupedList" :key="index">
         <h3 class="title">{{beautify(group.title)}} <span>￥{{group.total}}</span></h3>
         <ol>
@@ -72,6 +72,15 @@
       const keys = this.keyValueList.map(item => item.key);
       const values = this.keyValueList.map(item => item.value);
       return {
+        title: {
+          text :'统计图',
+          right : 145,
+          top:15,
+          textStyle: {
+            //fontWeight : 'normal',
+            fontSize: 14
+          }
+        },
         grid: {
           left: 0,
           right: 0,
@@ -98,7 +107,12 @@
         },
         yAxis: {
           type: 'value',
-          show: false
+          axisLine: {
+            show :false
+          },
+          splitLine: {
+            show : true,
+          },
         },
         series: [{
           symbol: 'circle',
@@ -174,12 +188,22 @@
 </script>
 
 <style lang="scss" scoped>
-
+  .group-wrapper {
+    width: 90%;
+    background: white;
+    margin: 30px auto 16px;
+    box-shadow: 0 2px 2px rgba(10,16,20,.14),0 0 2px rgba(10,16,20,.12);
+  }
   .chart {
     width: 430%;
 
     &-wrapper {
       overflow: auto;
+      width: 90%;
+      background: white;
+      border-radius: 2%;
+      margin: 30px auto 0;
+      box-shadow: 0 2px 2px rgba(10,16,20,.14),0 0 2px rgba(10,16,20,.12);
 
       &::-webkit-scrollbar {
         display: none;
@@ -202,11 +226,12 @@
 
   .title {
     @extend %item;
+    background: #f5f5f5;
 
   }
 
   .record {
-    background: white;
+
     @extend %item
   }
 
@@ -218,6 +243,7 @@
 
   ::v-deep {
     .type-tabs-item {
+      background: white;
       &.selected {
         background: rgb(80, 131, 255);
         color: white;

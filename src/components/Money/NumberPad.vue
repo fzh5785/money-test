@@ -79,13 +79,13 @@
 
       > button {
         width: 25%;
-        height: 64px;
+        height: 52px;
         float: left;
         background: transparent;
         border: none;
 
         &.ok {
-          height: 64*2px;
+          height: 52*2px;
           float: right;
           color: white;
         }
