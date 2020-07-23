@@ -74,7 +74,7 @@
       return {
         title: {
           text :'统计图',
-          right : 145,
+          right : 20,
           top:15,
           textStyle: {
             //fontWeight : 'normal',
