@@ -46,18 +46,12 @@
       this.record.notes = value;
 
     }
-
     onUpdateAmount(value: string) {
       this.record.amount = parseFloat(value);
 
     }
 
     saveRecord() {
-      if (this.record.type === '-') {
-        if (!this.record.tags || this.record.tags.length === 0) {
-          return window.alert('请至少输入一个标签');
-        }
-      }
       if (this.record.type === '+') {
         if (this.record.amount === 0) {
           return window.alert('请输入金额');

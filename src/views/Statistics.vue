@@ -148,7 +148,7 @@
     }
 
     tagString(tags: Tag[]) {
-      return tags.length === 0 ? '无' : tags.map(t => t.name).join('，');
+      return tags.length === 0 ? '其他' : tags.map(t => t.name).join('，');
     }
 
     get recordList() {
