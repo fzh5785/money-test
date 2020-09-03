@@ -1,29 +1,8 @@
-# money
+## 酒白记账
 
-## Project setup
-```
-yarn install
-```
+### 介绍
+酒白记账是一款极简的记账应用，也是一款基于Vue、VueRouter、Vuex、
+TypeScript的单页面应用。
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Run your unit tests
-```
-yarn test:unit
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+同时使用了echarts让数据可视化，可以通过图表更加直观的看到支出和收入的情
+况。
